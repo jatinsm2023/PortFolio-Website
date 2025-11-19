@@ -1,5 +1,5 @@
 import { useOSStore } from '@/lib/os-store';
-import { Wifi, Bluetooth, Moon, Sun, Monitor, Volume2, Battery } from 'lucide-react';
+import { Wifi, Bluetooth, Moon, Sun, Monitor, Volume2, Battery, Play, SkipForward, SkipBack, Music } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Slider } from '@/components/ui/slider';
 
@@ -48,6 +48,26 @@ export default function ControlCenter() {
             <span className="text-sm font-semibold">Screen Mirroring</span>
           </div>
         </div>
+      </div>
+
+      {/* Now Playing Mockup */}
+      <div className="bg-white/50 dark:bg-black/40 rounded-xl p-3 mb-4 shadow-sm flex items-center gap-4">
+         <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-purple-600 rounded-md shadow-sm flex items-center justify-center relative overflow-hidden shrink-0">
+            <Music size={24} className="text-white z-10" />
+            <div className="absolute inset-0 bg-black/10" />
+         </div>
+         <div className="flex-1 min-w-0">
+            <div className="text-xs font-bold truncate">Deep Focus Playlist</div>
+            <div className="text-[10px] opacity-60 truncate">YouTube Music • Lofi Girl</div>
+            <div className="flex items-center gap-3 mt-1.5">
+               <SkipBack size={12} className="fill-current cursor-pointer hover:scale-110 transition-transform" />
+               <Play size={14} className="fill-current cursor-pointer hover:scale-110 transition-transform" />
+               <SkipForward size={12} className="fill-current cursor-pointer hover:scale-110 transition-transform" />
+            </div>
+         </div>
+         <div className="w-1 h-8 rounded-full bg-gray-300 dark:bg-gray-600 overflow-hidden flex flex-col justify-end">
+            <div className="w-full h-2/3 bg-white animate-pulse" />
+         </div>
       </div>
 
       {/* Sliders */}

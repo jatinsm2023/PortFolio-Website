@@ -1,7 +1,7 @@
 import Window from '../os/Window';
-import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter } from 'lucide-react';
+import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const SIDEBAR_ITEMS = [
   { icon: Clock, label: 'Recents', id: 'recents' },
@@ -20,13 +20,27 @@ const STORAGE_STATS = [
 ];
 
 const SOCIAL_CONTACTS = [
-  { name: 'GitHub', handle: '@jatinsm2023', icon: Github, url: 'https://github.com/jatinsm2023', color: 'bg-gray-900' },
-  { name: 'LinkedIn', handle: 'Jatin Mahawar', icon: Linkedin, url: 'https://linkedin.com', color: 'bg-blue-600' },
-  { name: 'Twitter', handle: '@jatin_dev', icon: Twitter, url: 'https://twitter.com', color: 'bg-sky-500' },
+  { name: 'GitHub', handle: '@jatinsm2023', icon: Github, url: 'https://github.com/jatinsm2023', color: 'bg-[#24292e]', subtext: 'View Code' },
+  { name: 'LinkedIn', handle: 'Jatin Mahawar', icon: Linkedin, url: 'https://linkedin.com/in/jatin-mahawar', color: 'bg-[#0077b5]', subtext: 'Connect' },
+  { name: 'Twitter', handle: '@jatin_dev', icon: Twitter, url: 'https://twitter.com', color: 'bg-[#1da1f2]', subtext: 'Follow' },
+  { name: 'Email', handle: 'jatinmahawar08@gmail.com', icon: User, url: 'mailto:jatinmahawar08@gmail.com', color: 'bg-red-500', subtext: 'Contact' },
 ];
 
 export default function Finder() {
   const [activeTab, setActiveTab] = useState('recents');
+  const [githubStats, setGithubStats] = useState<{followers: number, public_repos: number} | null>(null);
+
+  useEffect(() => {
+    // Fetch real GitHub data for the "AirDrop" feel
+    fetch('https://api.github.com/users/jatinsm2023')
+      .then(res => res.json())
+      .then(data => {
+        if (data.followers) {
+          setGithubStats({ followers: data.followers, public_repos: data.public_repos });
+        }
+      })
+      .catch(err => console.error("Failed to fetch GitHub stats", err));
+  }, []);
 
   return (
     <Window 
@@ -57,29 +71,36 @@ export default function Finder() {
     >
       {activeTab === 'airdrop' ? (
         <div className="h-full flex flex-col items-center justify-center p-8 bg-white dark:bg-[#1e1e1e]">
-          <div className="w-24 h-24 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-8 animate-pulse">
+          <div className="w-24 h-24 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-4 animate-pulse relative">
              <Wifi size={48} className="text-blue-500" />
+             <div className="absolute inset-0 rounded-full border-2 border-blue-500/20 animate-ping" />
           </div>
-          <h2 className="text-xl font-semibold mb-2 dark:text-white">AirDrop</h2>
+          <h2 className="text-xl font-semibold mb-2 dark:text-white">AirDrop: Nearby Networks</h2>
           <p className="text-gray-500 dark:text-gray-400 mb-12 text-center max-w-md">
-            Share your network with nearby developers. Click to connect.
+            Connect with Jatin across the web.
+            {githubStats && <span className="block text-xs mt-2 text-blue-500 font-mono">GitHub Status: {githubStats.followers} followers • {githubStats.public_repos} repos</span>}
           </p>
           
-          <div className="flex gap-8 flex-wrap justify-center">
+          <div className="flex gap-6 flex-wrap justify-center">
             {SOCIAL_CONTACTS.map((contact, i) => (
               <a 
                 key={i}
                 href={contact.url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex flex-col items-center gap-3 group cursor-pointer"
+                className="flex flex-col items-center gap-3 group cursor-pointer p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
               >
-                <div className={cn("w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110", contact.color)}>
-                  <contact.icon size={32} className="text-white" />
+                <div className={cn("w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 text-white relative overflow-hidden", contact.color)}>
+                  <contact.icon size={32} className="relative z-10" />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                 </div>
                 <div className="text-center">
-                  <div className="font-medium text-gray-900 dark:text-white text-sm">{contact.name}</div>
+                  <div className="font-medium text-gray-900 dark:text-white text-sm flex items-center gap-1 justify-center">
+                    {contact.name}
+                    <ExternalLink size={10} className="opacity-50" />
+                  </div>
                   <div className="text-xs text-gray-500">{contact.handle}</div>
+                  <div className="text-[10px] text-blue-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">{contact.subtext}</div>
                 </div>
               </a>
             ))}

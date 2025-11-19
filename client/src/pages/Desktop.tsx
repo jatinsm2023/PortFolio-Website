@@ -9,6 +9,7 @@ import Mail from '@/components/apps/Mail';
 import Photos from '@/components/apps/Photos';
 import AboutThisMac from '@/components/os/AboutThisMac';
 import ControlCenter from '@/components/os/ControlCenter';
+import Spotlight from '@/components/os/Spotlight';
 import wallpaper from '@assets/generated_images/Abstract_MacOS_style_wallpaper_78150684.png';
 
 export default function Desktop() {
@@ -42,6 +43,7 @@ export default function Desktop() {
     >
       <MenuBar />
       <ControlCenter />
+      <Spotlight />
       
       {/* Desktop Area for Windows */}
       <div className="absolute inset-0 top-8 bottom-20 z-0">

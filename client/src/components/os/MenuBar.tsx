@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import BatteryMenu from './BatteryMenu';
 
 export default function MenuBar() {
   const [time, setTime] = useState(new Date());
@@ -64,9 +65,9 @@ export default function MenuBar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 py-0.5 rounded cursor-pointer">
-          <Battery size={18} />
-        </div>
+        {/* Enhanced Battery Menu */}
+        <BatteryMenu />
+        
         <div className="hidden sm:flex items-center gap-2 hover:bg-white/10 px-2 py-0.5 rounded cursor-pointer">
           <Wifi size={16} />
         </div>

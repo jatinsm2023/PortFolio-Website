@@ -1,0 +1,150 @@
+I want you to build a highly interactive Portfolio Website for me that looks and behaves exactly like a MacOS Desktop.
+
+Tech Stack:
+
+React (Vite)
+
+Tailwind CSS (for styling)
+
+Framer Motion (for animations, draggable windows, and opening/closing effects)
+
+Lucide-React (for icons)
+
+Core Design & Layout:
+
+Background: A high-quality abstract MacOS-style wallpaper.
+
+Top Menu Bar: -   Left: Apple Logo (opens a small dropdown with "Restart", "Sleep", "Shut Down"), and the text "Jatin Mahawar".
+
+Right: Current Time (ticking), Date, Wifi Icon, Battery Icon, and a Control Center toggle.
+
+The Dock (Bottom):
+
+A glass-morphism dock at the bottom of the screen containing app icons.
+
+Icons should have a "magnification" effect on hover (scale up slightly).
+
+Apps to include: Finder (About), VS Code (Experience/Skills), Safari (Projects), Terminal (CLI), Mail (Contact), and Photos.
+
+Window Manager:
+
+When an app icon is clicked, it should open a "Window".
+
+Windows must be draggable (using framer-motion drag controls).
+
+Windows should have the standard Mac "Traffic Light" buttons (Red to close, Yellow to minimize, Green to expand) on the top left.
+
+Windows should have a glass-morphism sidebar and a white content area.
+
+Clicking a window brings it to the front (z-index management).
+
+If a window is minimized, it shrinks back to the dock.
+
+App Specific Content (Use this JSON Data):
+
+1. Finder (About Me & Education):
+
+Sidebar: "Recents", "Desktop", "Downloads".
+
+Content Area: A clean profile view.
+
+Profile Info:
+
+Name: Jatin Mahawar
+
+Tagline: "Founding Engineering Intern @ CallKaro AI | IIT Kharagpur '27"
+
+Bio: "I am a dual degree student at IIT Kharagpur specializing in Computer Science. I have experience building Gen AI SaaS platforms, real estate tech, and compilers. I love solving complex problems with code."
+
+Education Folder: -   IIT Kharagpur (2022-2027): B.Tech (Hons) + M.Tech in CSE. CGPA: 8.54/10.
+
+Class XII: 94.20% | Class X: 82.67%.
+
+Resume File: Create a file icon labeled "Resume.pdf" that opens my PDF link (use a placeholder link for now).
+
+2. VS Code (Experience & Skills):
+
+UI: Make it look like the VS Code editor. Sidebar with file tree. Main area with code syntax highlighting.
+
+File 1: experience.json:
+
+[
+  {
+    "role": "Founding Engineering Intern",
+    "company": "CallKaro AI",
+    "duration": "Dec 2024 - Jun 2025",
+    "details": [
+      "Built Gen AI SaaS platform automating inbound/outbound calls.",
+      "Developed Call Scheduling API boosting conversions by 20%.",
+      "Integrated Hybrid RAG using Azure OpenAI & NumPy vectors.",
+      "Handled 60K+ calls/messages with React Infinite Scroller & WebSockets."
+    ]
+  },
+  {
+    "role": "Full Stack Developer",
+    "company": "iProp91",
+    "duration": "Aug 2024 - Oct 2024",
+    "details": [
+      "Architected real estate platform with microsecond latency.",
+      "Built secure OTP auth using OTPLESS & JWT.",
+      "Implemented group chat via WebSockets for customers & advocates."
+    ]
+  }
+]
+
+
+File 2: skills.js:
+
+const skills = {
+  languages: ["C", "C++", "Python", "Assembly", "Verilog", "JavaScript"],
+  web: ["React.js", "Node.js", "Express.js", "Tailwind CSS", "HTML/CSS"],
+  data_ai: ["NumPy", "Pandas", "RAG", "Azure OpenAI", "Mistral AI"],
+  tools: ["Git", "Docker", "Azure", "MongoDB", "PostgreSQL", "Redis"]
+};
+
+
+3. Safari (Projects):
+
+UI: Browser interface with a search bar (showing my github: https://www.google.com/search?q=github.com/jatinsm2023).
+
+Content: a Grid of "Website Cards" for my projects.
+
+Projects Data:
+
+MailKaro: "FastAPI & SMTP platform for mass mailing. Used Mistral AI for content variation to reduce spam. Doubled NGO donations."
+
+Tiny-C Compiler: "Machine-independent compiler built with Bison/Flex. Translates C to 3-address code."
+
+LLMSQL: "LLM-powered system translating natural language to SQL. Fine-tuned Mistral-7B."
+
+CallKaro AI: "Gen AI SaaS for automated business calls."
+
+Each card should have a "Visit GitHub" button linking to https://github.com/jatinsm2023.
+
+4. Terminal:
+
+A black window with green text.
+
+Allow users to type commands like help, whoami, clear, contact.
+
+whoami returns: "Jatin Mahawar - CSE Student at IIT KGP".
+
+5. Mail (Contact):
+
+UI: A clean email composition window.
+
+To: jatinmahawar08@gmail.com (Pre-filled).
+
+Subject: (User input).
+
+Body: (User input).
+
+"Send" button should trigger a mailto: link.
+
+Assets & Images:
+
+Use https://source.unsplash.com/random/800x600?code for project thumbnails.
+
+Use https://source.unsplash.com/random/200x200?portrait for my profile picture placeholder.
+
+Please ensure the app is responsive, but optimized primarily for Desktop viewing (since it's a desktop OS simulator). Mobile users should see a simplified version or a message asking to view on Desktop.

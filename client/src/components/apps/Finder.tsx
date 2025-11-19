@@ -1,5 +1,5 @@
 import Window from '../os/Window';
-import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter, ExternalLink, Mail as MailIcon } from 'lucide-react';
+import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter, ExternalLink, Mail as MailIcon, MapPin, Calendar } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
 import Experience from './Experience'; // Import Experience component

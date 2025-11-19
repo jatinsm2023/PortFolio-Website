@@ -2,17 +2,19 @@ import { motion } from 'framer-motion';
 import { useOSStore, AppId } from '@/lib/os-store';
 import { 
   Folder, 
-  Briefcase, // Changed icon for Experience
+  Briefcase, 
   Globe, 
   Terminal, 
   Mail, 
-  Image as ImageIcon 
+  Image as ImageIcon,
+  Code2 // Icon for Coding
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const APPS: { id: AppId; icon: any; label: string; color: string }[] = [
   { id: 'finder', icon: Folder, label: 'Finder', color: 'bg-blue-500' },
-  { id: 'experience', icon: Briefcase, label: 'Experience', color: 'bg-orange-500' }, // Updated to Launch Experience App
+  { id: 'experience', icon: Briefcase, label: 'Experience', color: 'bg-orange-500' },
+  { id: 'coding', icon: Code2, label: 'Coding', color: 'bg-green-600' }, // Added Coding App
   { id: 'safari', icon: Globe, label: 'Safari', color: 'bg-blue-400' },
   { id: 'terminal', icon: Terminal, label: 'Terminal', color: 'bg-gray-800' },
   { id: 'mail', icon: Mail, label: 'Mail', color: 'bg-blue-500' },

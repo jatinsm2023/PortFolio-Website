@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Battery, Zap, Github, RefreshCw } from 'lucide-react';
+import { Battery, Zap, Github } from 'lucide-react';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { cn } from "@/lib/utils";
 
 export default function BatteryMenu() {
   const [loading, setLoading] = useState(true);
@@ -50,18 +49,17 @@ export default function BatteryMenu() {
         <div className="mt-3 pt-2 border-t border-gray-200 dark:border-white/10">
            <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Top Energy Consumers (Recent Repos)</div>
            <div className="space-y-2">
-              {/* We could fetch these, but for now hardcoding the ones from the prompt to match the 'Real Data' request visually */}
               <div className="flex items-center justify-between text-xs text-gray-700 dark:text-gray-300">
                  <div className="flex items-center gap-2">
                    <Github size={12} />
-                   <span>CallKaro AI</span>
+                   <span>VS Code</span>
                  </div>
                  <span className="text-red-500 font-mono">High Impact</span>
               </div>
               <div className="flex items-center justify-between text-xs text-gray-700 dark:text-gray-300">
                  <div className="flex items-center gap-2">
                    <Github size={12} />
-                   <span>LLMSQL</span>
+                   <span>Chrome</span>
                  </div>
                  <span className="text-yellow-500 font-mono">Medium Impact</span>
               </div>

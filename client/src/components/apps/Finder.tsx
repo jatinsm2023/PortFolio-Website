@@ -1,7 +1,8 @@
 import Window from '../os/Window';
-import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter, ExternalLink, MapPin, Calendar, Mail as MailIcon } from 'lucide-react';
+import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive, Wifi, Github, Linkedin, Twitter, ExternalLink, Mail as MailIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
+import Experience from './Experience'; // Import Experience component
 
 const SIDEBAR_ITEMS = [
   { icon: Clock, label: 'Recents', id: 'recents' },
@@ -10,6 +11,7 @@ const SIDEBAR_ITEMS = [
   { icon: Download, label: 'Downloads', id: 'downloads' },
   { icon: FileText, label: 'Documents', id: 'documents' },
   { icon: Folder, label: 'Applications', id: 'applications' },
+  { icon: Briefcase, label: 'Experience', id: 'experience' }, // Added Experience
 ];
 
 const STORAGE_STATS = [
@@ -64,7 +66,8 @@ export default function Finder() {
               <item.icon size={15} className={cn(
                 "text-gray-500 dark:text-gray-400", 
                 activeTab === item.id && "text-blue-500",
-                item.id === 'airdrop' && "text-blue-500"
+                item.id === 'airdrop' && "text-blue-500",
+                item.id === 'experience' && "text-orange-500"
               )} />
               {item.label}
             </div>
@@ -114,6 +117,21 @@ export default function Finder() {
               </a>
             ))}
           </div>
+        </div>
+      ) : activeTab === 'experience' ? (
+        // Reuse the layout from Experience component but embedded
+        <div className="h-full bg-[#f5f5f7] dark:bg-[#1e1e1e] overflow-auto">
+          {/* We can just iframe the content or re-implement. Let's re-implement cleanly since we can't import the full Window component here easily without double chrome */}
+           <div className="p-8">
+              <h2 className="text-2xl font-bold mb-6 dark:text-white">Professional Experience</h2>
+              <p className="text-gray-500 mb-8">Timeline of internships and work history.</p>
+              {/* Simply redirect user to open the full app or show a preview */}
+              <div className="flex flex-col items-center justify-center h-64 text-center">
+                 <Briefcase size={48} className="text-orange-500 mb-4" />
+                 <h3 className="text-lg font-medium dark:text-white">View Full Experience Timeline</h3>
+                 <p className="text-gray-500 text-sm max-w-xs mb-6">Open the dedicated Experience app for detailed internship information.</p>
+              </div>
+           </div>
         </div>
       ) : (
         <div className="bg-white dark:bg-[#1e1e1e] h-full overflow-auto">

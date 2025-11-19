@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about';
+export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding';
 
 export interface WindowState {
   id: AppId;
@@ -17,6 +17,7 @@ interface OSState {
   activeWindowId: AppId | null;
   zCounter: number;
   isControlCenterOpen: boolean;
+  systemState: 'active' | 'booting' | 'locked' | 'sleeping';
   
   launchApp: (id: AppId) => void;
   closeWindow: (id: AppId) => void;
@@ -24,6 +25,7 @@ interface OSState {
   maximizeWindow: (id: AppId) => void;
   focusWindow: (id: AppId) => void;
   toggleControlCenter: () => void;
+  setSystemState: (state: 'active' | 'booting' | 'locked' | 'sleeping') => void;
 }
 
 export const useOSStore = create<OSState>((set) => ({
@@ -35,15 +37,16 @@ export const useOSStore = create<OSState>((set) => ({
     mail: { id: 'mail', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     photos: { id: 'photos', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     about: { id: 'about', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    coding: { id: 'coding', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
   },
   activeWindowId: null,
   zCounter: 10,
   isControlCenterOpen: false,
+  systemState: 'booting', // Start in booting state
 
   launchApp: (id) => set((state) => {
     const window = state.windows[id];
     if (window.isOpen) {
-      // If minimized, restore it
       if (window.isMinimized) {
         return {
           windows: {
@@ -54,7 +57,6 @@ export const useOSStore = create<OSState>((set) => ({
           zCounter: state.zCounter + 1
         };
       }
-      // Just focus it
       return {
         windows: {
           ...state.windows,
@@ -65,7 +67,6 @@ export const useOSStore = create<OSState>((set) => ({
       };
     }
     
-    // Open new window
     return {
       windows: {
         ...state.windows,
@@ -112,5 +113,9 @@ export const useOSStore = create<OSState>((set) => ({
 
   toggleControlCenter: () => set((state) => ({
     isControlCenterOpen: !state.isControlCenterOpen
+  })),
+
+  setSystemState: (newState) => set(() => ({
+    systemState: newState
   }))
 }));

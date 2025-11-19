@@ -16,11 +16,20 @@ export default function MenuBar() {
   const [time, setTime] = useState(new Date());
   const toggleControlCenter = useOSStore(state => state.toggleControlCenter);
   const launchApp = useOSStore(state => state.launchApp);
+  const setSystemState = useOSStore(state => state.setSystemState);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleRestart = () => {
+    window.location.reload();
+  };
+
+  const handleSystemAction = (action: 'locked' | 'sleeping') => {
+    setSystemState(action);
+  };
 
   return (
     <div className="h-8 bg-black/20 backdrop-blur-md flex items-center justify-between px-4 select-none z-50 text-white text-xs font-medium fixed top-0 w-full border-b border-white/5">
@@ -41,14 +50,14 @@ export default function MenuBar() {
             <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
             <DropdownMenuItem>Recent Items</DropdownMenuItem>
             <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
-            <DropdownMenuItem>Force Quit...</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSystemAction('locked')}>Force Quit...</DropdownMenuItem>
             <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
-            <DropdownMenuItem>Sleep</DropdownMenuItem>
-            <DropdownMenuItem>Restart...</DropdownMenuItem>
-            <DropdownMenuItem>Shut Down...</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSystemAction('sleeping')}>Sleep</DropdownMenuItem>
+            <DropdownMenuItem onSelect={handleRestart}>Restart...</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSystemAction('locked')}>Shut Down...</DropdownMenuItem>
             <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
-            <DropdownMenuItem>Lock Screen</DropdownMenuItem>
-            <DropdownMenuItem>Log Out Jatin Mahawar...</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSystemAction('locked')}>Lock Screen</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleSystemAction('locked')}>Log Out Jatin Mahawar...</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 

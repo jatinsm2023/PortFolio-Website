@@ -38,10 +38,7 @@ const INTERNSHIPS = [
 export default function Experience() {
   return (
     <Window 
-      id="vscode" // Reusing VSCode ID as 'Experience' app for now, or we can create a new one. Let's stick to the user request of "Internship section". 
-      // Actually, let's make a dedicated "Experience" app to replace VS Code in the dock or just launch this window.
-      // For now, I'll bind this to a new ID 'experience' and update the store later.
-      // Wait, the prompt said "Add Internship as another section". I will create a new component for it.
+      id="experience" 
       title="Experience & Internships" 
       width={900} 
       height={600}

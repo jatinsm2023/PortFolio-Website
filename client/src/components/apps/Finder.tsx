@@ -1,5 +1,5 @@
 import Window from '../os/Window';
-import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase } from 'lucide-react';
+import { Folder, FileText, Download, Clock, Monitor, GraduationCap, User, Briefcase, HardDrive } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const SIDEBAR_ITEMS = [
@@ -10,13 +10,20 @@ const SIDEBAR_ITEMS = [
   { icon: Folder, label: 'Applications' },
 ];
 
+const STORAGE_STATS = [
+  { label: 'Frontend', color: 'bg-blue-500', size: '40%' },
+  { label: 'Backend', color: 'bg-green-500', size: '25%' },
+  { label: 'AI/ML', color: 'bg-purple-500', size: '20%' },
+  { label: 'DevOps', color: 'bg-yellow-500', size: '15%' },
+];
+
 export default function Finder() {
   return (
     <Window 
       id="finder" 
       title="Finder" 
       width={800} 
-      height={500}
+      height={550}
       sidebar={
         <div className="p-2 space-y-1">
           <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 px-2 py-1 mb-1">Favorites</div>
@@ -79,6 +86,27 @@ export default function Finder() {
             </div>
           </div>
         </div>
+
+        {/* Skills Storage Bar */}
+        <div className="bg-gray-50/50 dark:bg-white/5 p-4 rounded-lg border border-gray-100 dark:border-white/5">
+           <h2 className="flex items-center gap-2 text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+              <HardDrive size={20} /> Skills Breakdown
+           </h2>
+           <div className="flex h-6 w-full rounded-md overflow-hidden mb-3 shadow-sm">
+             {STORAGE_STATS.map((stat, i) => (
+               <div key={i} className={cn(stat.color, "h-full")} style={{ width: stat.size }} />
+             ))}
+           </div>
+           <div className="flex flex-wrap gap-4 text-xs font-medium">
+             {STORAGE_STATS.map((stat, i) => (
+               <div key={i} className="flex items-center gap-2">
+                 <div className={cn("w-3 h-3 rounded-full", stat.color)} />
+                 <span className="text-gray-700 dark:text-gray-300">{stat.label}</span>
+               </div>
+             ))}
+           </div>
+        </div>
+
       </div>
     </Window>
   );

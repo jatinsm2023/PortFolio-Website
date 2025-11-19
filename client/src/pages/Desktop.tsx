@@ -7,6 +7,7 @@ import Safari from '@/components/apps/Safari';
 import Terminal from '@/components/apps/Terminal';
 import Mail from '@/components/apps/Mail';
 import Photos from '@/components/apps/Photos';
+import AboutThisMac from '@/components/os/AboutThisMac';
 import ControlCenter from '@/components/os/ControlCenter';
 import wallpaper from '@assets/generated_images/Abstract_MacOS_style_wallpaper_78150684.png';
 
@@ -51,6 +52,7 @@ export default function Desktop() {
          <Terminal />
          <Mail />
          <Photos />
+         <AboutThisMac />
       </div>
 
       <Dock />

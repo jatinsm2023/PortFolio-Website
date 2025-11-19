@@ -2,11 +2,19 @@ import { useState, useEffect } from 'react';
 import { Apple, Wifi, Battery, Search, MonitorCog } from 'lucide-react';
 import { format } from 'date-fns';
 import { useOSStore } from '@/lib/os-store';
-import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function MenuBar() {
   const [time, setTime] = useState(new Date());
   const toggleControlCenter = useOSStore(state => state.toggleControlCenter);
+  const launchApp = useOSStore(state => state.launchApp);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -16,9 +24,33 @@ export default function MenuBar() {
   return (
     <div className="h-8 bg-black/20 backdrop-blur-md flex items-center justify-between px-4 select-none z-50 text-white text-xs font-medium fixed top-0 w-full border-b border-white/5">
       <div className="flex items-center gap-4">
-        <div className="hover:bg-white/10 p-1 rounded cursor-pointer">
-          <Apple size={16} fill="currentColor" />
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="outline-none">
+            <div className="hover:bg-white/10 p-1 rounded cursor-pointer data-[state=open]:bg-white/20">
+              <Apple size={16} fill="currentColor" />
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56 bg-white/80 dark:bg-[#1e1e1e]/80 backdrop-blur-xl border-none shadow-xl ml-2 mt-1">
+            <DropdownMenuItem onSelect={() => launchApp('about')}>
+              About This Developer
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
+            <DropdownMenuItem>System Settings...</DropdownMenuItem>
+            <DropdownMenuItem>App Store...</DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
+            <DropdownMenuItem>Recent Items</DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
+            <DropdownMenuItem>Force Quit...</DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
+            <DropdownMenuItem>Sleep</DropdownMenuItem>
+            <DropdownMenuItem>Restart...</DropdownMenuItem>
+            <DropdownMenuItem>Shut Down...</DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-black/10 dark:bg-white/10" />
+            <DropdownMenuItem>Lock Screen</DropdownMenuItem>
+            <DropdownMenuItem>Log Out Jatin Mahawar...</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <span className="font-bold hidden sm:inline">Jatin Mahawar</span>
         
         <div className="hidden sm:flex gap-4 ml-2 text-white/90">

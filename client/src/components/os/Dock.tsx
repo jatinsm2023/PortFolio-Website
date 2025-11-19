@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useOSStore, AppId } from '@/lib/os-store';
 import { 
   Folder, 
-  Code2, 
+  Briefcase, // Changed icon for Experience
   Globe, 
   Terminal, 
   Mail, 
@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 
 const APPS: { id: AppId; icon: any; label: string; color: string }[] = [
   { id: 'finder', icon: Folder, label: 'Finder', color: 'bg-blue-500' },
-  { id: 'vscode', icon: Code2, label: 'VS Code', color: 'bg-blue-600' },
+  { id: 'experience', icon: Briefcase, label: 'Experience', color: 'bg-orange-500' }, // Updated to Launch Experience App
   { id: 'safari', icon: Globe, label: 'Safari', color: 'bg-blue-400' },
   { id: 'terminal', icon: Terminal, label: 'Terminal', color: 'bg-gray-800' },
   { id: 'mail', icon: Mail, label: 'Mail', color: 'bg-blue-500' },

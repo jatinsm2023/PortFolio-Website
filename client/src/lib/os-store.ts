@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AppId = 'finder' | 'vscode' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about';
+export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about';
 
 export interface WindowState {
   id: AppId;
@@ -29,7 +29,7 @@ interface OSState {
 export const useOSStore = create<OSState>((set) => ({
   windows: {
     finder: { id: 'finder', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
-    vscode: { id: 'vscode', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    experience: { id: 'experience', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     safari: { id: 'safari', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     terminal: { id: 'terminal', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     mail: { id: 'mail', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },

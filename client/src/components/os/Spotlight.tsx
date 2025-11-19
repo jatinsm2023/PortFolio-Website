@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Command } from "cmdk";
-import { Search, Calculator, Calendar, CreditCard, Settings, User, Globe, Code, Terminal, Mail, Image } from "lucide-react";
+import { Search, Calculator, Calendar, CreditCard, Settings, User, Globe, Briefcase, Terminal, Mail, Image } from "lucide-react";
 import { useOSStore } from "@/lib/os-store";
 import { cn } from "@/lib/utils";
 
@@ -39,9 +39,9 @@ export default function Spotlight() {
                 <User className="h-4 w-4" />
                 <span>Finder (About Me)</span>
               </Command.Item>
-              <Command.Item onSelect={() => { launchApp('vscode'); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
-                <Code className="h-4 w-4" />
-                <span>VS Code (Experience)</span>
+              <Command.Item onSelect={() => { launchApp('experience'); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Briefcase className="h-4 w-4" />
+                <span>Experience (Internships)</span>
               </Command.Item>
               <Command.Item onSelect={() => { launchApp('safari'); setOpen(false); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
                 <Globe className="h-4 w-4" />
@@ -63,16 +63,12 @@ export default function Spotlight() {
             
             <Command.Group heading="Developer Skills" className="px-2 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 mt-2">
               <Command.Item className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-default">
-                <Code className="h-4 w-4" />
-                <span>React & Next.js</span>
+                <Briefcase className="h-4 w-4" />
+                <span>CallKaro AI Intern</span>
               </Command.Item>
               <Command.Item className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-default">
-                <Code className="h-4 w-4" />
-                <span>TypeScript & Node.js</span>
-              </Command.Item>
-              <Command.Item className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-default">
-                <Code className="h-4 w-4" />
-                <span>Python & AI/ML</span>
+                <Briefcase className="h-4 w-4" />
+                <span>iProp91 Developer</span>
               </Command.Item>
             </Command.Group>
           </Command.List>

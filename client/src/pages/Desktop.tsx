@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import MenuBar from '@/components/os/MenuBar';
 import Dock from '@/components/os/Dock';
 import Finder from '@/components/apps/Finder';
-import VSCode from '@/components/apps/VSCode';
+import Experience from '@/components/apps/Experience'; // Changed VSCode to Experience
 import Safari from '@/components/apps/Safari';
 import Terminal from '@/components/apps/Terminal';
 import Mail from '@/components/apps/Mail';
@@ -49,7 +49,7 @@ export default function Desktop() {
       <div className="absolute inset-0 top-8 bottom-20 z-0">
          {/* Apps are rendered here but managed by z-index in Window component */}
          <Finder />
-         <VSCode />
+         <Experience />
          <Safari />
          <Terminal />
          <Mail />

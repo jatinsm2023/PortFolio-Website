@@ -13,6 +13,7 @@ import AboutThisMac from '@/components/os/AboutThisMac';
 import ControlCenter from '@/components/os/ControlCenter';
 import Spotlight from '@/components/os/Spotlight';
 import WeatherWidget from '@/components/os/WeatherWidget';
+import Jatin from '@assets/generated_images/jatin_mahawar.png';
 import wallpaper from '@assets/generated_images/Abstract_MacOS_style_wallpaper_78150684.png';
 import { useOSStore } from '@/lib/os-store';
 import { Apple } from 'lucide-react';
@@ -54,7 +55,7 @@ export default function Desktop() {
         ) : (
           <div className="flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <img
-              src="https://source.unsplash.com/random/200x200?portrait"
+              src={Jatin}
               alt="Jatin Mahawar"
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white/10 shadow-2xl"
             />

@@ -59,7 +59,7 @@ export default function ControlCenter() {
             </div>
             <div className="flex flex-col leading-none">
               <span className="text-sm font-semibold">Wi-Fi</span>
-              <span className="text-[10px] opacity-60">Not Found</span>
+              <span className="text-[10px] opacity-60">Home_5G</span>
             </div>
           </div>
           <div className="flex items-center gap-3">

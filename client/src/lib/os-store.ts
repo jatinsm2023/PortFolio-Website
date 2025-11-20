@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding';
+export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding' | 'notes';
 
 export interface WindowState {
   id: AppId;
@@ -17,14 +17,18 @@ interface OSState {
   activeWindowId: AppId | null;
   zCounter: number;
   isControlCenterOpen: boolean;
+  isSpotlightOpen: boolean;
   systemState: 'active' | 'booting' | 'locked' | 'sleeping';
-  
+
   launchApp: (id: AppId) => void;
   closeWindow: (id: AppId) => void;
   minimizeWindow: (id: AppId) => void;
   maximizeWindow: (id: AppId) => void;
   focusWindow: (id: AppId) => void;
   toggleControlCenter: () => void;
+  toggleSpotlight: () => void;
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
   setSystemState: (state: 'active' | 'booting' | 'locked' | 'sleeping') => void;
 }
 
@@ -38,10 +42,12 @@ export const useOSStore = create<OSState>((set) => ({
     photos: { id: 'photos', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     about: { id: 'about', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     coding: { id: 'coding', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    notes: { id: 'notes', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
   },
   activeWindowId: null,
   zCounter: 10,
   isControlCenterOpen: false,
+  isSpotlightOpen: false,
   systemState: 'booting', // Start in booting state
 
   launchApp: (id) => set((state) => {
@@ -66,7 +72,7 @@ export const useOSStore = create<OSState>((set) => ({
         zCounter: state.zCounter + 1
       };
     }
-    
+
     return {
       windows: {
         ...state.windows,
@@ -92,7 +98,7 @@ export const useOSStore = create<OSState>((set) => ({
     },
     activeWindowId: null
   })),
-  
+
   maximizeWindow: (id) => set((state) => ({
     windows: {
       ...state.windows,
@@ -113,6 +119,15 @@ export const useOSStore = create<OSState>((set) => ({
 
   toggleControlCenter: () => set((state) => ({
     isControlCenterOpen: !state.isControlCenterOpen
+  })),
+
+  toggleSpotlight: () => set((state) => ({
+    isSpotlightOpen: !state.isSpotlightOpen
+  })),
+
+  theme: 'light',
+  toggleTheme: () => set((state) => ({
+    theme: state.theme === 'light' ? 'dark' : 'light'
   })),
 
   setSystemState: (newState) => set(() => ({

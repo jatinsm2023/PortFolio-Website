@@ -46,10 +46,10 @@ const PROJECTS = [
 
 export default function Safari() {
   return (
-    <Window 
-      id="safari" 
-      title="Safari - Jatin's Projects" 
-      width={1000} 
+    <Window
+      id="safari"
+      title="Safari - Jatin's Projects"
+      width={1000}
       height={700}
     >
       <div className="flex flex-col h-full bg-[#fbfbfb] dark:bg-[#1e1e1e]">
@@ -60,29 +60,29 @@ export default function Safari() {
             <div className="p-1 hover:bg-black/5 rounded-md transition-colors"><ArrowRight size={16} /></div>
             <div className="p-1 hover:bg-black/5 rounded-md transition-colors"><RotateCw size={14} /></div>
           </div>
-          
+
           <div className="flex-1 bg-white dark:bg-[#1e1e1e] rounded-lg h-9 flex items-center px-4 text-sm shadow-sm border border-gray-200 dark:border-white/5 text-center justify-center text-gray-600 dark:text-gray-300 group transition-all focus-within:ring-2 ring-blue-500/20">
             <Search size={14} className="mr-2 opacity-50 group-focus-within:text-blue-500" />
             <span>github.com/jatinsm2023/projects</span>
           </div>
-          
-           <div className="p-1 hover:bg-black/5 rounded-md transition-colors text-gray-500"><ExternalLink size={16} /></div>
+
+          <div className="p-1 hover:bg-black/5 rounded-md transition-colors text-gray-500"><ExternalLink size={16} /></div>
         </div>
 
         {/* Content */}
         <div className="flex-1 overflow-auto p-8">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center mb-12">
-               <h1 className="text-4xl font-bold mb-4 dark:text-white tracking-tight">Academic & Personal Projects</h1>
-               <p className="text-gray-500 dark:text-gray-400 text-center max-w-xl text-lg">
-                 Deep dives into Compilers, AI Systems, and Architecture.
-               </p>
+              <h1 className="text-4xl font-bold mb-4 dark:text-white tracking-tight">Academic & Personal Projects</h1>
+              <p className="text-gray-500 dark:text-gray-400 text-center max-w-xl text-lg">
+                Deep dives into Compilers, AI Systems, and Architecture.
+              </p>
             </div>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
               {PROJECTS.map((project, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className={cn(
                     "group bg-white dark:bg-[#252526] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full",
                     project.highlight ? "lg:col-span-2 lg:flex-row lg:h-96" : ""
@@ -95,12 +95,12 @@ export default function Safari() {
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                     <div className="absolute bottom-4 left-4">
-                       <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg text-white border border-white/20">
-                          <project.icon size={20} />
-                       </div>
+                      <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg text-white border border-white/20">
+                        <project.icon size={20} />
+                      </div>
                     </div>
                   </div>
-                  
+
                   <div className={cn(
                     "p-6 flex flex-col justify-between",
                     project.highlight ? "lg:w-2/5 lg:p-8" : "flex-1"
@@ -114,11 +114,11 @@ export default function Safari() {
                           <Github size={20} />
                         </a>
                       </div>
-                      
+
                       <p className={cn("text-gray-600 dark:text-gray-300 mb-6 leading-relaxed", project.highlight ? "text-sm" : "text-xs")}>
                         {project.desc}
                       </p>
-                      
+
                       <div className="flex flex-wrap gap-2 mb-6">
                         {project.tags.map(tag => (
                           <span key={tag} className="px-2.5 py-1 bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-[10px] uppercase tracking-wider rounded-md font-semibold border border-gray-200 dark:border-white/5">
@@ -127,10 +127,10 @@ export default function Safari() {
                         ))}
                       </div>
                     </div>
-                    
-                    <a 
-                      href="https://github.com/jatinsm2023" 
-                      target="_blank" 
+
+                    <a
+                      href="https://github.com/jatinsm2023"
+                      target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center justify-center px-6 py-2.5 bg-black dark:bg-white dark:text-black text-white rounded-xl text-sm font-medium gap-2 hover:opacity-80 transition-all w-full shadow-sm"
                     >
@@ -141,25 +141,7 @@ export default function Safari() {
               ))}
             </div>
 
-            {/* GitHub Call to Action */}
-            <div className="bg-[#24292e] rounded-2xl p-8 text-center text-white shadow-xl mb-8 relative overflow-hidden group">
-               <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-               <div className="relative z-10 flex flex-col items-center">
-                 <Github size={48} className="mb-4 text-gray-400" />
-                 <h2 className="text-2xl font-bold mb-2">More on GitHub</h2>
-                 <p className="text-gray-400 mb-6 max-w-xl text-sm">
-                   Explore 32-bit RISC Processors, K-Nearest Neighbor Search libraries, and other low-level system projects.
-                 </p>
-                 <a 
-                   href="https://github.com/jatinsm2023" 
-                   target="_blank" 
-                   rel="noreferrer"
-                   className="inline-flex items-center gap-2 px-6 py-2 bg-white text-black rounded-full font-bold hover:bg-gray-100 transition-colors"
-                 >
-                   Visit Profile
-                 </a>
-               </div>
-            </div>
+
 
           </div>
         </div>

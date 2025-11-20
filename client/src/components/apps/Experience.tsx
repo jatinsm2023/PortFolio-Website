@@ -4,10 +4,10 @@ import { cn } from '@/lib/utils';
 
 const INTERNSHIPS = [
   {
-    role: "Founding Engineering Intern",
+    role: "Founding Engineering",
     company: "CallKaro AI",
     location: "Backed by Microsoft for Startups",
-    duration: "Dec 2024 - Jun 2025",
+    duration: "Dec 2024 - Present",
     logo: "https://ui-avatars.com/api/?name=C+K&background=0D8ABC&color=fff&size=128",
     color: "bg-blue-500",
     details: [

@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 const EXPERIENCE = [
   {
-    role: "Founding Engineering Intern",
+    role: "Founding Engineering",
     company: "CallKaro AI",
-    duration: "Dec 2024 - Jun 2025",
+    duration: "Dec 2024 - Present",
     details: [
       "Built Gen AI SaaS platform automating inbound/outbound calls.",
       "Developed Call Scheduling API boosting conversions by 20%.",

@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import { useOSStore, AppId } from '@/lib/os-store';
-import { 
-  Folder, 
-  Briefcase, 
-  Globe, 
-  Terminal, 
-  Mail, 
+import {
+  Folder,
+  Briefcase,
+  Globe,
+  Terminal,
+  Mail,
   Image as ImageIcon,
-  Code2 // Icon for Coding
+  Code2, // Icon for Coding
+  StickyNote
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -18,7 +19,8 @@ const APPS: { id: AppId; icon: any; label: string; color: string }[] = [
   { id: 'safari', icon: Globe, label: 'Safari', color: 'bg-blue-400' },
   { id: 'terminal', icon: Terminal, label: 'Terminal', color: 'bg-gray-800' },
   { id: 'mail', icon: Mail, label: 'Mail', color: 'bg-blue-500' },
-  { id: 'photos', icon: ImageIcon, label: 'Photos', color: 'bg-white' },
+  { id: 'notes', icon: StickyNote, label: 'Notes', color: 'bg-yellow-400' },
+  // { id: 'photos', icon: ImageIcon, label: 'Photos', color: 'bg-white' },
 ];
 
 export default function Dock() {
@@ -31,10 +33,10 @@ export default function Dock() {
         {APPS.map((app) => {
           const isOpen = windows[app.id].isOpen;
           const Icon = app.icon;
-          
+
           return (
-            <DockItem 
-              key={app.id} 
+            <DockItem
+              key={app.id}
               onClick={() => launchApp(app.id)}
               isOpen={isOpen}
             >
@@ -55,17 +57,17 @@ export default function Dock() {
                   </div>
                 ) : app.id === 'safari' ? (
                   <div className="relative w-full h-full bg-white rounded-xl overflow-hidden flex items-center justify-center">
-                     <div className="absolute inset-0 bg-blue-500 opacity-10" />
-                     <Globe className="text-blue-500" size={32} />
+                    <div className="absolute inset-0 bg-blue-500 opacity-10" />
+                    <Globe className="text-blue-500" size={32} />
                   </div>
                 ) : app.id === 'terminal' ? (
-                   <div className="w-full h-full bg-gray-900 rounded-xl flex items-center justify-center border border-gray-700">
-                     <span className="text-green-500 font-mono font-bold text-lg">{`>_`}</span>
-                   </div>
+                  <div className="w-full h-full bg-gray-900 rounded-xl flex items-center justify-center border border-gray-700">
+                    <span className="text-green-500 font-mono font-bold text-lg">{`>_`}</span>
+                  </div>
                 ) : (
                   <Icon size={28} strokeWidth={1.5} />
                 )}
-                
+
               </div>
               {isOpen && (
                 <div className="absolute -bottom-1.5 w-1 h-1 bg-white rounded-full" />

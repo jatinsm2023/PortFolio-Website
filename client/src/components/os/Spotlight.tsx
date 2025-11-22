@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Command } from "cmdk";
-import { Search, Calculator, Calendar, CreditCard, Settings, User, Globe, Briefcase, Terminal, Mail, Image, StickyNote } from "lucide-react";
+import { Search, Calculator, Calendar, CreditCard, Settings, User, Globe, Briefcase, Terminal, Mail, Image, StickyNote, Music2, Gamepad2, Palette, Sparkles, Trash2 } from "lucide-react";
 import { useOSStore } from "@/lib/os-store";
 import { cn } from "@/lib/utils";
 
@@ -59,6 +59,34 @@ export default function Spotlight() {
               <Command.Item onSelect={() => { launchApp('notes'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
                 <StickyNote className="h-4 w-4" />
                 <span>Notes</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('settings'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Settings className="h-4 w-4" />
+                <span>Settings</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('music'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Music2 className="h-4 w-4" />
+                <span>Music</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('calculator'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Calculator className="h-4 w-4" />
+                <span>Calculator</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('games'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Gamepad2 className="h-4 w-4" />
+                <span>Games</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('paint'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Palette className="h-4 w-4" />
+                <span>Paint</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('assistant'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Sparkles className="h-4 w-4" />
+                <span>Assistant</span>
+              </Command.Item>
+              <Command.Item onSelect={() => { launchApp('trash'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
+                <Trash2 className="h-4 w-4" />
+                <span>Trash</span>
               </Command.Item>
               {/* <Command.Item onSelect={() => { launchApp('photos'); toggleSpotlight(); }} className="flex items-center gap-2 px-2 py-2 rounded-md aria-selected:bg-blue-500 aria-selected:text-white cursor-pointer">
                 <Image className="h-4 w-4" />

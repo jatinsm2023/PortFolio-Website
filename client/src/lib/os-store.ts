@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding' | 'notes';
+export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding' | 'notes' | 'settings' | 'music' | 'calculator' | 'games' | 'paint' | 'trash' | 'assistant';
 
 export interface WindowState {
   id: AppId;
@@ -19,6 +19,8 @@ interface OSState {
   isControlCenterOpen: boolean;
   isSpotlightOpen: boolean;
   systemState: 'active' | 'booting' | 'locked' | 'sleeping';
+  wallpaper: string;
+  accentColor: string;
 
   launchApp: (id: AppId) => void;
   closeWindow: (id: AppId) => void;
@@ -29,6 +31,8 @@ interface OSState {
   toggleSpotlight: () => void;
   theme: 'light' | 'dark';
   toggleTheme: () => void;
+  setWallpaper: (wallpaper: string) => void;
+  setAccentColor: (color: string) => void;
   setSystemState: (state: 'active' | 'booting' | 'locked' | 'sleeping') => void;
 }
 
@@ -43,12 +47,21 @@ export const useOSStore = create<OSState>((set) => ({
     about: { id: 'about', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     coding: { id: 'coding', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     notes: { id: 'notes', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    settings: { id: 'settings', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    music: { id: 'music', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    calculator: { id: 'calculator', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    games: { id: 'games', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    paint: { id: 'paint', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    trash: { id: 'trash', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
+    assistant: { id: 'assistant', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
   },
   activeWindowId: null,
   zCounter: 10,
   isControlCenterOpen: false,
   isSpotlightOpen: false,
   systemState: 'booting', // Start in booting state
+  wallpaper: '/wallpapers/default.jpg',
+  accentColor: 'blue',
 
   launchApp: (id) => set((state) => {
     const window = state.windows[id];
@@ -128,6 +141,14 @@ export const useOSStore = create<OSState>((set) => ({
   theme: 'light',
   toggleTheme: () => set((state) => ({
     theme: state.theme === 'light' ? 'dark' : 'light'
+  })),
+
+  setWallpaper: (wallpaper) => set(() => ({
+    wallpaper
+  })),
+
+  setAccentColor: (accentColor) => set(() => ({
+    accentColor
   })),
 
   setSystemState: (newState) => set(() => ({

@@ -17,6 +17,13 @@ import Jatin from '@assets/generated_images/jatin_mahawar.png';
 import wallpaper from '@assets/generated_images/Abstract_MacOS_style_wallpaper_78150684.png';
 import { useOSStore } from '@/lib/os-store';
 import { Apple } from 'lucide-react';
+import Settings from '@/components/apps/Settings';
+import Music from '@/components/apps/Music';
+import Calculator from '@/components/apps/Calculator';
+import Games from '@/components/apps/Games';
+import Paint from '@/components/apps/Paint';
+import Trash from '@/components/apps/Trash';
+import Assistant from '@/components/apps/Assistant';
 
 export default function Desktop() {
   const [isLoading, setIsLoading] = useState(true);
@@ -105,6 +112,13 @@ export default function Desktop() {
         <Notes />
         <Photos />
         <AboutThisMac />
+        <Settings />
+        <Music />
+        <Calculator />
+        <Games />
+        <Paint />
+        <Trash />
+        <Assistant />
       </div>
 
       <Dock />

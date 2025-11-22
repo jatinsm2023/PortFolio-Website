@@ -57,8 +57,8 @@ const STORAGE_STATS = [
 
 const SOCIAL_CONTACTS = [
   { name: 'GitHub', handle: '@jatinsm2023', icon: Github, url: 'https://github.com/jatinsm2023', color: 'bg-[#24292e]', subtext: 'View Code' },
-  { name: 'LinkedIn', handle: 'Jatin Mahawar', icon: Linkedin, url: 'https://linkedin.com/in/jatin-mahawar', color: 'bg-[#0077b5]', subtext: 'Connect' },
-  { name: 'Twitter', handle: '@jatin_dev', icon: Twitter, url: 'https://twitter.com', color: 'bg-[#1da1f2]', subtext: 'Follow' },
+  { name: 'LinkedIn', handle: 'Jatin Mahawar', icon: Linkedin, url: 'https://www.linkedin.com/in/jatin-mahawar-b086a4253', color: 'bg-[#0077b5]', subtext: 'Connect' },
+  // { name: 'Twitter', handle: '@jatin_dev', icon: Twitter, url: 'https://twitter.com', color: 'bg-[#1da1f2]', subtext: 'Follow' },
   { name: 'Email', handle: 'jatinmahawar08@gmail.com', icon: MailIcon, url: 'mailto:jatinmahawar08@gmail.com', color: 'bg-red-500', subtext: 'Contact' },
 ];
 
@@ -332,7 +332,7 @@ export default function Finder() {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-[#252526] p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 flex items-center justify-between group cursor-pointer hover:bg-gray-50 transition-colors">
+                {/* <div className="bg-white dark:bg-[#252526] p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 flex items-center justify-between group cursor-pointer hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-red-100 dark:bg-red-900/20 text-red-600 rounded-lg flex items-center justify-center">
                       <FileText size={20} />
@@ -343,7 +343,7 @@ export default function Finder() {
                     </div>
                   </div>
                   <Download size={16} className="text-gray-400 group-hover:text-red-500 transition-colors" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

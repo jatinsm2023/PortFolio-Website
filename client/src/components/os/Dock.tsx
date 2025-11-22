@@ -8,7 +8,14 @@ import {
   Mail,
   Image as ImageIcon,
   Code2, // Icon for Coding
-  StickyNote
+  StickyNote,
+  Settings,
+  Music2,
+  Calculator as CalculatorIcon,
+  Gamepad2,
+  Palette,
+  Trash2,
+  Sparkles
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +27,13 @@ const APPS: { id: AppId; icon: any; label: string; color: string }[] = [
   { id: 'terminal', icon: Terminal, label: 'Terminal', color: 'bg-gray-800' },
   { id: 'mail', icon: Mail, label: 'Mail', color: 'bg-blue-500' },
   { id: 'notes', icon: StickyNote, label: 'Notes', color: 'bg-yellow-400' },
+  { id: 'settings', icon: Settings, label: 'Settings', color: 'bg-gray-500' },
+  { id: 'music', icon: Music2, label: 'Music', color: 'bg-purple-500' },
+  { id: 'calculator', icon: CalculatorIcon, label: 'Calculator', color: 'bg-gray-700' },
+  { id: 'games', icon: Gamepad2, label: 'Games', color: 'bg-pink-500' },
+  { id: 'paint', icon: Palette, label: 'Paint', color: 'bg-orange-400' },
+  { id: 'assistant', icon: Sparkles, label: 'Assistant', color: 'bg-blue-600' },
+  { id: 'trash', icon: Trash2, label: 'Trash', color: 'bg-red-500' },
   // { id: 'photos', icon: ImageIcon, label: 'Photos', color: 'bg-white' },
 ];
 

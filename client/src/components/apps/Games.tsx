@@ -1,5 +1,5 @@
 import Window from '../os/Window';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const TicTacToe = () => {
     const [board, setBoard] = useState(Array(9).fill(null));
@@ -72,35 +72,144 @@ const TicTacToe = () => {
 };
 
 const Snake = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     const [score, setScore] = useState(0);
     const [gameStarted, setGameStarted] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
+    const gameLoopRef = useRef<number>();
+
+    const snake = useRef([[10, 10]]);
+    const direction = useRef([0, 1]);
+    const food = useRef([15, 15]);
+
+    useEffect(() => {
+        if (!gameStarted || gameOver) return;
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const gridSize = 20;
+        const tileCount = 20;
+
+        const gameLoop = () => {
+            // Move snake
+            const head = snake.current[0];
+            const newHead = [
+                head[0] + direction.current[0],
+                head[1] + direction.current[1]
+            ];
+
+            // Check collision with walls
+            if (
+                newHead[0] < 0 || newHead[0] >= tileCount ||
+                newHead[1] < 0 || newHead[1] >= tileCount
+            ) {
+                setGameOver(true);
+                return;
+            }
+
+            // Check collision with self
+            if (snake.current.some(segment => segment[0] === newHead[0] && segment[1] === newHead[1])) {
+                setGameOver(true);
+                return;
+            }
+
+            snake.current.unshift(newHead);
+
+            // Check if ate food
+            if (newHead[0] === food.current[0] && newHead[1] === food.current[1]) {
+                setScore(s => s + 10);
+                food.current = [
+                    Math.floor(Math.random() * tileCount),
+                    Math.floor(Math.random() * tileCount)
+                ];
+            } else {
+                snake.current.pop();
+            }
+
+            // Draw
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw snake
+            ctx.fillStyle = '#0f0';
+            snake.current.forEach(segment => {
+                ctx.fillRect(segment[1] * gridSize, segment[0] * gridSize, gridSize - 2, gridSize - 2);
+            });
+
+            // Draw food
+            ctx.fillStyle = '#f00';
+            ctx.fillRect(food.current[1] * gridSize, food.current[0] * gridSize, gridSize - 2, gridSize - 2);
+
+            gameLoopRef.current = requestAnimationFrame(gameLoop);
+        };
+
+        const interval = setInterval(() => {
+            gameLoop();
+        }, 150);
+
+        return () => {
+            clearInterval(interval);
+            if (gameLoopRef.current) cancelAnimationFrame(gameLoopRef.current);
+        };
+    }, [gameStarted, gameOver]);
+
+    useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+            if (!gameStarted || gameOver) return;
+
+            switch (e.key) {
+                case 'ArrowUp':
+                    if (direction.current[0] !== 1) direction.current = [-1, 0];
+                    break;
+                case 'ArrowDown':
+                    if (direction.current[0] !== -1) direction.current = [1, 0];
+                    break;
+                case 'ArrowLeft':
+                    if (direction.current[1] !== 1) direction.current = [0, -1];
+                    break;
+                case 'ArrowRight':
+                    if (direction.current[1] !== -1) direction.current = [0, 1];
+                    break;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+    }, [gameStarted, gameOver]);
+
+    const startGame = () => {
+        snake.current = [[10, 10]];
+        direction.current = [0, 1];
+        food.current = [15, 15];
+        setScore(0);
+        setGameOver(false);
+        setGameStarted(true);
+    };
 
     return (
         <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-green-500 to-teal-600 p-6">
             <h2 className="text-3xl font-bold text-white mb-4">Snake Game</h2>
-            <div className="bg-white rounded-xl p-6 shadow-2xl text-center">
-                <div className="w-80 h-80 bg-gray-900 rounded-lg mb-4 flex items-center justify-center">
-                    <div className="text-white">
-                        {!gameStarted ? (
-                            <div>
-                                <p className="text-4xl mb-2">🐍</p>
-                                <p className="text-sm">Use arrow keys to move</p>
-                            </div>
-                        ) : (
-                            <p className="text-sm">Game in progress...</p>
-                        )}
-                    </div>
-                </div>
-                <div className="mb-3">
+            <div className="bg-white rounded-xl p-6 shadow-2xl">
+                <canvas
+                    ref={canvasRef}
+                    width={400}
+                    height={400}
+                    className="bg-gray-900 rounded-lg mb-4"
+                />
+                <div className="mb-3 flex justify-between items-center">
                     <p className="text-lg">Score: <span className="font-bold">{score}</span></p>
+                    {gameOver && <span className="text-red-600 font-bold">Game Over!</span>}
                 </div>
                 <button
-                    onClick={() => setGameStarted(!gameStarted)}
+                    onClick={startGame}
                     className="w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
                 >
-                    {gameStarted ? 'Reset Game' : 'Start Game'}
+                    {gameStarted && !gameOver ? 'Restart Game' : 'Start Game'}
                 </button>
-                <p className="text-xs text-gray-500 mt-2">Full snake game coming soon!</p>
+                <p className="text-xs text-gray-500 mt-2 text-center">Use arrow keys to move</p>
             </div>
         </div>
     );

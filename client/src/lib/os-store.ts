@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding' | 'notes' | 'settings' | 'music' | 'calculator' | 'games' | 'paint' | 'trash' | 'assistant';
+export type AppId = 'finder' | 'experience' | 'safari' | 'terminal' | 'mail' | 'photos' | 'about' | 'coding' | 'notes' | 'settings' | 'music' | 'calculator' | 'games' | 'paint' | 'assistant';
 
 export interface WindowState {
   id: AppId;
@@ -52,7 +52,6 @@ export const useOSStore = create<OSState>((set) => ({
     calculator: { id: 'calculator', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     games: { id: 'games', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     paint: { id: 'paint', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
-    trash: { id: 'trash', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
     assistant: { id: 'assistant', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1 },
   },
   activeWindowId: null,

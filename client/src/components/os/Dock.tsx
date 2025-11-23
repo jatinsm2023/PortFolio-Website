@@ -14,7 +14,6 @@ import {
   Calculator as CalculatorIcon,
   Gamepad2,
   Palette,
-  Trash2,
   Sparkles
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -33,7 +32,6 @@ const APPS: { id: AppId; icon: any; label: string; color: string }[] = [
   { id: 'games', icon: Gamepad2, label: 'Games', color: 'bg-pink-500' },
   { id: 'paint', icon: Palette, label: 'Paint', color: 'bg-orange-400' },
   { id: 'assistant', icon: Sparkles, label: 'Assistant', color: 'bg-blue-600' },
-  { id: 'trash', icon: Trash2, label: 'Trash', color: 'bg-red-500' },
   // { id: 'photos', icon: ImageIcon, label: 'Photos', color: 'bg-white' },
 ];
 

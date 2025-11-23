@@ -22,7 +22,6 @@ import Music from '@/components/apps/Music';
 import Calculator from '@/components/apps/Calculator';
 import Games from '@/components/apps/Games';
 import Paint from '@/components/apps/Paint';
-import Trash from '@/components/apps/Trash';
 import Assistant from '@/components/apps/Assistant';
 
 export default function Desktop() {
@@ -117,7 +116,6 @@ export default function Desktop() {
         <Calculator />
         <Games />
         <Paint />
-        <Trash />
         <Assistant />
       </div>
 

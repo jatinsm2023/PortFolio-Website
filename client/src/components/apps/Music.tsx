@@ -1,20 +1,26 @@
 import Window from '../os/Window';
-import { useState, useEffect } from 'react';
-import { Play, Pause, SkipForward, SkipBack, Music as MusicIcon, Heart, Shuffle, Repeat } from 'lucide-react';
+import { useState } from 'react';
+import { Play, Pause, Volume2, Search, ExternalLink } from 'lucide-react';
+
+const FEATURED_TRACKS = [
+    { title: 'Blinding Lights', artist: 'The Weeknd', youtubeId: 'fHI8X4OXluQ' },
+    { title: 'Shape of You', artist: 'Ed Sheeran', youtubeId: 'JGwWNGJdvx8' },
+    { title: 'Levitating', artist: 'Dua Lipa', youtubeId: 'TUVcZfQe-Kw' },
+    { title: 'Starboy', artist: 'The Weeknd', youtubeId: '34Na4j8AVgA' },
+    { title: 'Bad Guy', artist: 'Billie Eilish', youtubeId: 'DyDfgMOUjCI' },
+    { title: 'Circles', artist: 'Post Malone', youtubeId: 'wXhTHyIgQ_U' },
+];
 
 export default function Music() {
-    const [nowPlaying, setNowPlaying] = useState<any>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [currentTrack, setCurrentTrack] = useState(FEATURED_TRACKS[0]);
 
-    useEffect(() => {
-        fetch('/api/spotify/now-playing')
-            .then(res => res.json())
-            .then(data => {
-                setNowPlaying(data);
-                setIsPlaying(data?.isPlaying || false);
-            })
-            .catch(err => console.error('Failed to fetch Spotify data', err));
-    }, []);
+    const filteredTracks = searchQuery
+        ? FEATURED_TRACKS.filter(track =>
+            track.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            track.artist.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : FEATURED_TRACKS;
 
     return (
         <Window
@@ -27,120 +33,84 @@ export default function Music() {
                 {/* Sidebar */}
                 <div className="w-56 bg-black/40 p-4 flex flex-col gap-4">
                     <div className="space-y-2">
-                        <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
+                        <button className="w-full text-left px-3 py-2 rounded-lg bg-white/20">
                             🏠 Home
                         </button>
                         <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
                             🔍 Search
                         </button>
-                        <button className="w-full text-left px-3 py-2 rounded-lg bg-white/20">
-                            📚 Your Library
-                        </button>
-                    </div>
-
-                    <div className="mt-auto">
-                        <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm">
-                            ❤️ Liked Songs
+                        <button className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
+                            📚 Library
                         </button>
                     </div>
                 </div>
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col">
-                    {/* Top Section */}
-                    <div className="flex-1 overflow-auto p-8">
-                        <h1 className="text-4xl font-bold mb-6">Now Playing</h1>
-
-                        {nowPlaying ? (
-                            <div className="flex gap-6 items-start">
-                                {/* Album Art */}
-                                <div className="w-64 h-64 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-2xl flex items-center justify-center shrink-0">
-                                    {nowPlaying.albumArt ? (
-                                        <img src={nowPlaying.albumArt} alt="Album Art" className="w-full h-full object-cover rounded-lg" />
-                                    ) : (
-                                        <MusicIcon size={80} />
-                                    )}
-                                </div>
-
-                                {/* Track Info */}
-                                <div className="flex-1">
-                                    <h2 className="text-5xl font-bold mb-2">
-                                        {nowPlaying.title || 'No Track Playing'}
-                                    </h2>
-                                    <p className="text-2xl text-white/60 mb-4">
-                                        {nowPlaying.artist || 'Not Connected'}
-                                    </p>
-                                    <p className="text-lg text-white/40">
-                                        {nowPlaying.album || ''}
-                                    </p>
-
-                                    {nowPlaying.lastPlayed && (
-                                        <div className="mt-4 px-3 py-1 bg-white/10 rounded-full inline-block text-sm">
-                                            Last Played
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="text-center text-white/60 py-20">
-                                <MusicIcon size={80} className="mx-auto mb-4 opacity-50" />
-                                <p>No music playing</p>
-                                <p className="text-sm">Connect to Spotify to see your tracks</p>
-                            </div>
-                        )}
+                    {/* Top Bar with Search */}
+                    <div className="p-4 border-b border-white/10">
+                        <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full">
+                            <Search size={18} />
+                            <input
+                                type="text"
+                                placeholder="Search for songs..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="flex-1 bg-transparent outline-none placeholder-white/60"
+                            />
+                        </div>
                     </div>
 
-                    {/* Player Controls */}
-                    <div className="bg-black/60 backdrop-blur-xl p-4 border-t border-white/10">
-                        <div className="flex items-center justify-between max-w-3xl mx-auto">
-                            {/* Left - Track Info */}
-                            <div className="flex items-center gap-3 w-64">
-                                <div className="w-12 h-12 bg-white/10 rounded flex items-center justify-center">
-                                    {nowPlaying?.albumArt ? (
-                                        <img src={nowPlaying.albumArt} alt="" className="w-full h-full object-cover rounded" />
-                                    ) : (
-                                        <MusicIcon size={20} />
-                                    )}
-                                </div>
-                                <div className="min-w-0">
-                                    <p className="text-sm font-medium truncate">{nowPlaying?.title || 'Not Playing'}</p>
-                                    <p className="text-xs text-white/60 truncate">{nowPlaying?.artist || ''}</p>
-                                </div>
-                                <button className="text-white/60 hover:text-white">
-                                    <Heart size={16} />
-                                </button>
-                            </div>
-
-                            {/* Center - Controls */}
-                            <div className="flex flex-col items-center gap-2">
-                                <div className="flex items-center gap-4">
-                                    <button className="text-white/60 hover:text-white">
-                                        <Shuffle size={18} />
-                                    </button>
-                                    <button className="text-white/60 hover:text-white">
-                                        <SkipBack size={20} />
-                                    </button>
-                                    <button className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                                        {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-0.5" />}
-                                    </button>
-                                    <button className="text-white/60 hover:text-white">
-                                        <SkipForward size={20} />
-                                    </button>
-                                    <button className="text-white/60 hover:text-white">
-                                        <Repeat size={18} />
-                                    </button>
-                                </div>
-                                <div className="flex items-center gap-2 w-96">
-                                    <span className="text-xs text-white/60">0:00</span>
-                                    <div className="flex-1 h-1 bg-white/20 rounded-full overflow-hidden">
-                                        <div className="h-full bg-white w-1/3"></div>
+                    {/* Content Area */}
+                    <div className="flex-1 overflow-auto p-6">
+                        {currentTrack && (
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold mb-4">Now Playing</h2>
+                                <div className="bg-white/10 rounded-lg p-4 mb-4">
+                                    <div className="aspect-video mb-4 bg-black rounded overflow-hidden">
+                                        <iframe
+                                            width="100%"
+                                            height="100%"
+                                            src={`https://www.youtube.com/embed/${currentTrack.youtubeId}?autoplay=0`}
+                                            title={currentTrack.title}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
                                     </div>
-                                    <span className="text-xs text-white/60">3:45</span>
+                                    <h3 className="text-xl font-bold">{currentTrack.title}</h3>
+                                    <p className="text-white/60">{currentTrack.artist}</p>
                                 </div>
                             </div>
+                        )}
 
-                            {/* Right - Volume */}
-                            <div className="w-64"></div>
+                        <h2 className="text-2xl font-bold mb-4">
+                            {searchQuery ? 'Search Results' : 'Featured Tracks'}
+                        </h2>
+                        <div className="grid grid-cols-2 gap-4">
+                            {filteredTracks.map((track, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setCurrentTrack(track)}
+                                    className={`p-4 rounded-lg transition-all hover:bg-white/20 text-left ${currentTrack.youtubeId === track.youtubeId ? 'bg-white/20' : 'bg-white/10'
+                                        }`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded flex items-center justify-center">
+                                            {currentTrack.youtubeId === track.youtubeId ? (
+                                                <Play size={20} fill="currentColor" />
+                                            ) : (
+                                                <span className="text-2xl">🎵</span>
+                                            )}
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-medium truncate">{track.title}</p>
+                                            <p className="text-sm text-white/60 truncate">{track.artist}</p>
+                                        </div>
+                                        <ExternalLink size={16} className="text-white/40" />
+                                    </div>
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>

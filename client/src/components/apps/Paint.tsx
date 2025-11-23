@@ -32,8 +32,10 @@ export default function Paint() {
         if (!context || !canvas) return;
 
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
 
         context.beginPath();
         context.moveTo(x, y);
@@ -47,8 +49,10 @@ export default function Paint() {
         if (!context || !canvas) return;
 
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = (e.clientX - rect.left) * scaleX;
+        const y = (e.clientY - rect.top) * scaleY;
 
         context.strokeStyle = tool === 'eraser' ? 'white' : color;
         context.lineWidth = lineWidth;
@@ -99,8 +103,8 @@ export default function Paint() {
                         <button
                             onClick={() => setTool('pen')}
                             className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${tool === 'pen'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
                                 }`}
                         >
                             ✏️ Pen
@@ -108,8 +112,8 @@ export default function Paint() {
                         <button
                             onClick={() => setTool('eraser')}
                             className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${tool === 'eraser'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'
                                 }`}
                         >
                             🧹 Eraser
